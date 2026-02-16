@@ -1,0 +1,74 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    image: ankane/pgvector:latest
+    container_name: academic_rag_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - academic_db_volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: academic_rag_pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - academic_rag_pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: academic_rag_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  django_app:
+    build: .
+    container_name: academic_rag_app
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      gunicorn config.wsgi:application --bind 0.0.0.0:8000
+      "
+    volumes:
+      - .:/app
+      - media_volume:/app/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - .env
+
+  celery_worker:
+    build: .
+    container_name: academic_rag_celery
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - .:/app
+      - media_volume:/app/media
+    depends_on:
+      - django_app
+      - redis
+      - postgres
+    env_file:
+      - .env
+
+volumes:
+  academic_db_volume:
+  media_volume:
+  academic_rag_pgadmin:

@@ -1,0 +1,1237 @@
+[2026-02-14 20:57:15,039] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x77a877541010>> raised: ModuleNotFoundError("No module named 'apps.core'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 152, in validate_models
+    self.django_setup()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 148, in django_setup
+    django.setup()
+  File "/usr/local/lib/python3.11/site-packages/django/__init__.py", line 24, in setup
+    apps.populate(settings.INSTALLED_APPS)
+  File "/usr/local/lib/python3.11/site-packages/django/apps/registry.py", line 91, in populate
+    app_config = AppConfig.create(entry)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/apps/config.py", line 193, in create
+    import_module(entry)
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'apps.core'
+[2026-02-14 20:57:15,044] ERROR celery.utils.dispatch.signal Signal handler <promise@0x77a877462fd0 --> <bound method Celery._autodiscover_tasks of <Celery academic_rag at 0x77a877542e50>>> raised: AppRegistryNotReady("Apps aren't loaded yet.")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/vine/promises.py", line 161, in __call__
+    return self.throw()
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/vine/promises.py", line 158, in __call__
+    retval = fun(*final_args, **final_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 805, in _autodiscover_tasks
+    return self._autodiscover_tasks_from_fixups(related_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 814, in _autodiscover_tasks_from_fixups
+    return self._autodiscover_tasks_from_names([
+                                               ^
+  File "/usr/local/lib/python3.11/site-packages/celery/app/base.py", line 817, in <listcomp>
+    for pkg in fixup.autodiscover_tasks()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 123, in autodiscover_tasks
+    return [config.name for config in apps.get_app_configs()]
+                                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/apps/registry.py", line 147, in get_app_configs
+    self.check_apps_ready()
+  File "/usr/local/lib/python3.11/site-packages/django/apps/registry.py", line 138, in check_apps_ready
+    raise AppRegistryNotReady("Apps aren't loaded yet.")
+django.core.exceptions.AppRegistryNotReady: Apps aren't loaded yet.
+[2026-02-15 07:07:17,547] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7ea8e67e1110>> raised: ModuleNotFoundError("No module named 'apps.ingestion.ingester'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+  File "/app/apps/tasks/celery_tasks.py", line 5, in <module>
+    from apps.ingestion.ingester import SlideIngester
+ModuleNotFoundError: No module named 'apps.ingestion.ingester'
+[2026-02-15 07:24:41,089] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7b90b68dcd50>> raised: ModuleNotFoundError("No module named 'apps.ingestion.services.slide_image_extractor'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+  File "/app/apps/tasks/celery_tasks.py", line 8, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 3, in <module>
+    from apps.ingestion.ingester import SlideIngester
+  File "/app/apps/ingestion/ingester.py", line 5, in <module>
+    from .services.slide_image_extractor import SlideImageExtractor
+ModuleNotFoundError: No module named 'apps.ingestion.services.slide_image_extractor'
+[2026-02-15 07:26:40,930] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7c274ba53450>> raised: ImportError("cannot import name 'EmbeddingProcessor' from 'apps.embeddings.embedder' (/app/apps/embeddings/embedder.py)")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+  File "/app/apps/tasks/celery_tasks.py", line 8, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 5, in <module>
+    from apps.embeddings.embedder import EmbeddingProcessor
+ImportError: cannot import name 'EmbeddingProcessor' from 'apps.embeddings.embedder' (/app/apps/embeddings/embedder.py)
+[2026-02-15 07:31:41,090] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x76a9a5d4c910>> raised: ModuleNotFoundError("No module named 'langchain.llms'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+  File "/app/apps/tasks/celery_tasks.py", line 8, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 7, in <module>
+    from apps.generation.generator import SlideGenerator
+  File "/app/apps/generation/generator.py", line 2, in <module>
+    from .llm_wrapper import GroqLangChainLLM
+  File "/app/apps/generation/llm_wrapper.py", line 1, in <module>
+    from langchain.llms.base import LLM
+ModuleNotFoundError: No module named 'langchain.llms'
+[2026-02-15 07:34:03,278] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7318267ff610>> raised: ModuleNotFoundError("No module named 'langchain.llms'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+  File "/app/apps/tasks/celery_tasks.py", line 8, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 7, in <module>
+    from apps.generation.generator import SlideGenerator
+  File "/app/apps/generation/generator.py", line 2, in <module>
+    from .llm_wrapper import GroqLangChainLLM
+  File "/app/apps/generation/llm_wrapper.py", line 1, in <module>
+    from langchain.llms.base import LLM
+ModuleNotFoundError: No module named 'langchain.llms'
+[2026-02-15 07:48:46,240] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7c77d4e20650>> raised: ModuleNotFoundError("No module named 'langchain.schema'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+  File "/app/apps/tasks/celery_tasks.py", line 8, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 7, in <module>
+    from apps.generation.generator import SlideGenerator
+  File "/app/apps/generation/generator.py", line 2, in <module>
+    from .groq_client import GroqLangChainLLM
+  File "/app/apps/generation/groq_client.py", line 1, in <module>
+    from langchain.schema import LLM, LLMResult
+ModuleNotFoundError: No module named 'langchain.schema'
+[2026-02-15 09:23:35,377] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x77657c0accd0>> raised: ImportError("cannot import name 'TableOfContents' from 'reportlab.platypus' (/usr/local/lib/python3.11/site-packages/reportlab/platypus/__init__.py)")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+  File "/app/apps/tasks/celery_tasks.py", line 8, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 9, in <module>
+    from apps.pdf_rendering.level3_renderer import Level3Renderer  # added import
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/pdf_rendering/level3_renderer.py", line 1, in <module>
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, TableOfContents
+ImportError: cannot import name 'TableOfContents' from 'reportlab.platypus' (/usr/local/lib/python3.11/site-packages/reportlab/platypus/__init__.py)
+[2026-02-15 09:54:47,430] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x796fd8874110>> raised: ImportError("cannot import name 'TableOfContents' from 'reportlab.platypus' (/usr/local/lib/python3.11/site-packages/reportlab/platypus/__init__.py)")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+  File "/app/apps/tasks/celery_tasks.py", line 8, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 9, in <module>
+    from apps.pdf_rendering.level3_renderer import Level3Renderer  # added import
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/pdf_rendering/level3_renderer.py", line 1, in <module>
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image, PageBreak, TableOfContents
+ImportError: cannot import name 'TableOfContents' from 'reportlab.platypus' (/usr/local/lib/python3.11/site-packages/reportlab/platypus/__init__.py)
+[2026-02-15 10:00:22,773] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7dfa18164a10>> raised: ImportError("cannot import name 'app' from 'apps.tasks.celery_tasks' (/app/apps/tasks/celery_tasks.py)")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+ImportError: cannot import name 'app' from 'apps.tasks.celery_tasks' (/app/apps/tasks/celery_tasks.py)
+[2026-02-15 10:07:28,039] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7164a6704b90>> raised: ImportError("cannot import name 'app' from 'apps.tasks.celery_tasks' (/app/apps/tasks/celery_tasks.py)")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+  File "/app/apps/tasks/__init__.py", line 2, in <module>
+    from .celery_tasks import app as celery_app
+ImportError: cannot import name 'app' from 'apps.tasks.celery_tasks' (/app/apps/tasks/celery_tasks.py)
+[2026-02-15 10:11:37,749] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x735ad53f6d10>> raised: ImportError("cannot import name 'process_slides_pipeline' from 'apps.tasks.celery_tasks' (/app/apps/tasks/celery_tasks.py)")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_pipeline
+ImportError: cannot import name 'process_slides_pipeline' from 'apps.tasks.celery_tasks' (/app/apps/tasks/celery_tasks.py)
+[2026-02-15 11:10:43,640] WARNING django.request Not Found: /api/upload_slides
+[2026-02-15 11:11:32,757] ERROR django.request Internal Server Error: /api/generate
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/api/generate/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[2026-02-15 11:14:19,083] WARNING django.request Bad Request: /api/generate/
+[2026-02-15 11:15:46,105] WARNING django.request Bad Request: /api/generate/
+[2026-02-15 11:20:54,989] ERROR django.request Internal Server Error: /api/generate
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/deprecation.py", line 122, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/middleware/common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/middleware/common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to localhost:8000/api/generate/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+[2026-02-15 11:21:19,564] WARNING kombu.connection No hostname was supplied. Reverting to default 'localhost'
+[2026-02-15 11:21:20,211] ERROR django.request Internal Server Error: /api/generate/
+[2026-02-15 11:28:41,337] ERROR django.request Internal Server Error: /api/task-status/6ba37eab-9fa0-4d3d-9450-c754b5134d26/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/api/views.py", line 72, in get
+    pdf_filename = os.path.basename(result.get("pdf_filename"))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 142, in basename
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+[2026-02-15 11:34:47,628] WARNING django.request Bad Request: /api/generate/
+[2026-02-15 14:06:14,670] WARNING django.request Bad Request: /api/generate/
+[2026-02-15 14:12:43,665] ERROR django.request Internal Server Error: /api/task-status/914444d2-8198-4c6b-ae71-71fbaa770fbe/
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/apps/api/views.py", line 72, in get
+    pdf_filename = os.path.basename(result.get("pdf_filename"))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen posixpath>", line 142, in basename
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+[2026-02-15 16:46:41,810] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7ca0f1191950>> raised: ModuleNotFoundError("No module named 'courses'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_task
+  File "/app/apps/tasks/celery_tasks.py", line 9, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 3, in <module>
+    from apps.ingestion.ingester import SlideIngester
+  File "/app/apps/ingestion/ingester.py", line 7, in <module>
+    from courses.models import Course
+ModuleNotFoundError: No module named 'courses'
+[2026-02-15 16:48:31,522] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x781c9ee7cc10>> raised: ModuleNotFoundError("No module named 'courses'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 9, in <module>
+    path("api/courses/", include("courses.urls")),
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1126, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'courses'
+[2026-02-15 16:51:13,738] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x73f3a8418890>> raised: ModuleNotFoundError("No module named 'courses'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 9, in <module>
+    path("api/courses/", include("courses.urls")),
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1126, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1140, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'courses'
+[2026-02-16 11:24:21,713] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x79cc72299990>> raised: ModuleNotFoundError("No module named 'chunking'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_task
+  File "/app/apps/tasks/celery_tasks.py", line 9, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 5, in <module>
+    from apps.chunking.custom_chunker import AcademicChunker
+  File "/app/apps/chunking/custom_chunker.py", line 4, in <module>
+    from chunking.llm_concept_chunker import GroqLLMConceptChunker
+ModuleNotFoundError: No module named 'chunking'
+[2026-02-16 11:27:40,273] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7729cad19990>> raised: ModuleNotFoundError("No module named 'chunking'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_task
+  File "/app/apps/tasks/celery_tasks.py", line 9, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 5, in <module>
+    from apps.chunking.custom_chunker import AcademicChunker
+  File "/app/apps/chunking/custom_chunker.py", line 4, in <module>
+    from chunking.llm_concept_chunker import GroqLLMConceptChunker
+ModuleNotFoundError: No module named 'chunking'
+[2026-02-16 11:29:57,604] ERROR celery.utils.dispatch.signal Signal handler <bound method DjangoFixup.on_import_modules of <celery.fixups.django.DjangoFixup object at 0x7f865c495b10>> raised: ModuleNotFoundError("No module named 'llm_concept_chunker'")
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/celery/utils/dispatch/signal.py", line 280, in send
+    response = receiver(signal=self, sender=sender, **named)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 103, in on_import_modules
+    self.worker_fixup.validate_models()
+  File "/usr/local/lib/python3.11/site-packages/celery/fixups/django.py", line 154, in validate_models
+    run_checks()
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/registry.py", line 89, in run_checks
+    new_errors = check(app_configs=app_configs, databases=databases)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 44, in check_url_namespaces_unique
+    all_namespaces = _load_all_namespaces(resolver)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/core/checks/urls.py", line 63, in _load_all_namespaces
+    url_patterns = getattr(resolver, "url_patterns", [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 718, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+                       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/utils/functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/resolvers.py", line 711, in urlconf_module
+    return import_module(self.urlconf_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/config/urls.py", line 8, in <module>
+    path("api/", include("apps.api.urls")),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/django/urls/conf.py", line 39, in include
+    urlconf_module = import_module(urlconf_module)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1204, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 940, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/app/apps/api/urls.py", line 2, in <module>
+    from .views import SlideRAGAPIView, TaskStatusAPIView
+  File "/app/apps/api/views.py", line 8, in <module>
+    from apps.tasks.celery_tasks import process_slides_task
+  File "/app/apps/tasks/celery_tasks.py", line 9, in <module>
+    from apps.pipeline.nodes import (
+  File "/app/apps/pipeline/nodes.py", line 5, in <module>
+    from apps.chunking.custom_chunker import AcademicChunker
+  File "/app/apps/chunking/custom_chunker.py", line 4, in <module>
+    from llm_concept_chunker import GroqLLMConceptChunker
+ModuleNotFoundError: No module named 'llm_concept_chunker'
