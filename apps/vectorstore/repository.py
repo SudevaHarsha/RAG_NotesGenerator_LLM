@@ -1,64 +1,78 @@
-from typing import List, Dict, Any, Optional
-from django.db.models import F
-from django.db import connection
+# apps/vectorstore/repository.py
+from typing import List, Dict
+from apps.lectures.models import Lecture
+from apps.vectorstore.models import VectorChunk
 from pgvector.django import CosineDistance
 
-from .models import VectorChunk
-
-
 class VectorRepository:
-    """
-    Handles vector storage and retrieval using pgvector.
-    """
 
     @staticmethod
-    def store_chunks(chunks: List[Dict[str, Any]]) -> None:
+    @staticmethod
+    def store_embedded_chunks(
+        lecture_id,
+        namespace: str,
+        embedded_chunks: List[Dict],
+    ):
         """
-        Bulk insert embedded chunks into PostgreSQL.
+        Bulk create VectorChunk records after embedding stage.
+
+        embedded_chunks format:
+        [
+            {
+                "text": str,
+                "embedding": List[float],
+                "slide_number": int | None,
+                "source_type": "private_user" | "transcript",
+            }
+        ]
         """
-        print(f"Storing {len(chunks)} chunks into the vectorstore...")
-        objects = [
-            VectorChunk(
-                namespace=chunk.get("namespace", "private"),
+
+        lecture = Lecture.objects.get(id=lecture_id)
+
+        objects_to_create = []
+
+        for chunk in embedded_chunks:
+            obj = VectorChunk(
+                lecture=lecture,
+                namespace=namespace,
                 chunk_text=chunk["chunk_text"],
                 embedding=chunk["embedding"],
-                slide_number=chunk["slide_number"],
-                slide_image_path=chunk.get("slide_image_path"),
-                subject=chunk["subject"],
-                topic=chunk["topic"],
-                academic_level=chunk["academic_level"],
-                content_type=chunk["content_type"],
-                source_type=chunk.get("source_type", "private_user"),
+                slide_number=chunk.get("slide_number"),
+                source_type=chunk["source_type"],
             )
-            for chunk in chunks
-        ]
-        print(f"Prepared {len(objects)} VectorChunk objects for bulk insertion.")
-        VectorChunk.objects.bulk_create(objects, batch_size=100)
-        print("Bulk insertion completed.")
+            objects_to_create.append(obj)
+
+        VectorChunk.objects.bulk_create(objects_to_create, batch_size=500)
+
+        return len(objects_to_create)
+
+    @staticmethod
+    def get_slide_chunks(namespace: str, lecture_id):
+        return VectorChunk.objects.filter(
+            namespace=namespace,
+            lecture_id=lecture_id,
+            source_type="slides",
+        ).order_by("slide_number")
 
     @staticmethod
     def similarity_search(
-        query_embedding: List[float],
-        top_k: int = 5,
-        namespace: str = "private",
-        filters: Optional[Dict[str, Any]] = None,
-    ) -> List[VectorChunk]:
-        """
-        Perform cosine similarity search with optional metadata filters.
-        """
+        query_embedding,
+        top_k,
+        namespace,
+        lecture_id,
+        source_type,
+    ):
+        queryset = VectorChunk.objects.filter(
+            namespace=namespace,
+            lecture_id=lecture_id,
+            source_type=source_type,
+        )
 
-        queryset = VectorChunk.objects.filter(namespace=namespace)
-
-        # Apply metadata filters dynamically
-        if filters:
-            queryset = queryset.filter(**filters)
-
-        # Cosine distance ordering (lower is better)
-        queryset = queryset.annotate(
-            distance=CosineDistance("embedding", query_embedding)
-        ).order_by("distance")[:top_k]
-
-        return list(queryset)
+        results = VectorChunk.objects.annotate(
+        distance=CosineDistance('embedding', query_embedding)
+        ).order_by('distance')[:top_k]
+        
+        return results
 
     @staticmethod
     def delete_namespace(namespace: str) -> None:
@@ -66,6 +80,12 @@ class VectorRepository:
         Utility for future shared/private cleanup.
         """
         VectorChunk.objects.filter(namespace=namespace).delete()
+        
+    def get_all_slides(filters):
+        return VectorChunk.objects.filter(
+            source_type="private_user",
+            **filters
+        ).order_by("slide_number")
 
     @staticmethod
     def count_chunks(namespace: str = "private") -> int:

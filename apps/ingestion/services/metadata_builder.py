@@ -15,6 +15,7 @@ class MetadataBuilder:
                 continue
 
             chunk = {
+                "source_type": "slide",
                 "chunk_text": content_text,
                 "slide_number": slide["slide_number"],
                 "slide_image_path": slide.get("image_path"),
@@ -22,7 +23,7 @@ class MetadataBuilder:
                 "topic": topic,
                 "academic_level": academic_level,
                 "content_type": "theory",  # default, can be adjusted
-                "source_type": "private_user",
+                "source_type": "slides",
                 "namespace": "private",
             }
             print(f"Built chunk for Slide {slide['slide_number']}: {chunk}...")  # Log chunk creation (truncated for readability)

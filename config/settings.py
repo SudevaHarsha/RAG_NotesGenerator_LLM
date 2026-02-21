@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "apps.api",
     "apps.tasks",
     "apps.courses",
+    "apps.lectures",
 ]
 
 # -------------------------------------------------------------------

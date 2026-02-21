@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.conf import settings
 from apps.api.serializers import FileUploadSerializer
-from apps.tasks.celery_tasks import process_slides_task
+from apps.tasks.celery_tasks import process_lecture_task
 from celery.result import AsyncResult
 
 class SlideRAGAPIView(APIView):
@@ -36,7 +36,7 @@ class SlideRAGAPIView(APIView):
 
             try:
                 # Trigger async Celery task that executes LangGraph
-                task = process_slides_task.delay(
+                task = process_lecture_task.delay(
                     file_path=upload_path,
                     question=question,
                     generation_mode=generation_mode,
